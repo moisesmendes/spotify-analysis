@@ -27,3 +27,29 @@ Dataset columns:
 13. acous: Acousticness *(The higher the value the more acoustic the song is.)*
 14. spch: Speechiness *(The higher the value the more spoken word the song contains.)*
 15. pop: Popularity *(The higher the value the more popular the song is.)*
+
+
+### Pre-processing
+
+#### Creating and grouping by supergenre
+
+The `top genre` column brings detailed genres that could be aggregated into a single `supergenre`, for instance: 
+
+* `pop`, `barbadian pop`, `australian pop` and `acoustic pop` could be grouped as the `pop` supergenre;
+* `hip hop`, `canadian hip hop`, `detroit hip hop` can be aggregated to `hip hop` supergenre.
+
+This was done mostly looking at the last word of the `top genre` column, but some special cases where addressed, such as `hip hop`, and some highly representative genres were kept as their originals (`dance pop`, for instance).
+
+Following this new labeling, 29 supergenres were found out of the 50 original genres.
+
+#### Supergenre criteria for selection for training
+
+A new dataset was generated as a subset of the original one with the condition of fulfilling the two following criteria.
+
+1. Only supergenres with at least 5 songs are allowed. 16 of the 29 supergenres passed this criterion.
+2. For genres with more than 15 songs, only 15 will be chosen randomly. The three genres that fell in this category were `dance pop`, `pop` and `canadian pop`.
+
+After the described preprocessing, the original (603,15)-shape dataframe was transformed into a (173, 16)-shape dataframe.
+
+Preprocessed file location: `data/002_intermediate_data/preprocessed_data.csv`
+
